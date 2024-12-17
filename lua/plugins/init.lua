@@ -37,6 +37,7 @@ return {
       { "folke/neodev.nvim", opts = {} },
     },
     config = function()
+      require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
   },
@@ -98,7 +99,7 @@ return {
     'rmagatti/auto-session',
     lazy = false,
     dependencies = {
-      'nvim-telescope/telescope.nvim', -- Only needed if you want to use sesssion lens
+      'nvim-telescope/telescope.nvim',
     },
     config = function()
       require('auto-session').setup({
@@ -106,8 +107,6 @@ return {
         -- auto_sessions_enabled = true,
         auto_save_enabled = true,
         auto_restore_enabled = false,
-        pre_save_cmds = { "silent! mkview" }, -- Сохранение views перед сохранением сессии
-        post_restore_cmds = { "silent! loadview" }, -- Загрузка views после восстановления сессии
       })
     end,
   },
@@ -147,6 +146,31 @@ return {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
       }
+  },
+
+  {
+    "stevearc/dressing.nvim",
+    lazy = false,
+    opts = {},
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = false,
+    config = function()
+      require("todo-comments").setup()
+    end
+  },
+
+  {
+    "ggandor/leap.nvim",
+    lazy = false,
+    config = function ()
+      local leap = require('leap')
+      leap.add_default_mappings()
+      leap.opts.case_sensitive = true
+    end,
   },
 
   -- {
