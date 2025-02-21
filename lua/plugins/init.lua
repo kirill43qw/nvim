@@ -173,6 +173,10 @@ return {
     end,
   },
 
+  {
+    "tpope/vim-fugitive"
+  },
+
   -- {
   --   "jackMort/ChatGPT.nvim",
   --     event = "VeryLazy",
