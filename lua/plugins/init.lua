@@ -16,15 +16,16 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     opts = {
-      ensure_installed = {
-        "black",
-        "debugpy",
-        "mypy",
-        "ruff",
-        "ruff_lsp",
-        "pyright",
-        "lua-language-server",
-      },
+      -- ensure_installed = {
+      --   "black",
+      --   "debugpy",
+      --   "mypy",
+      --   "ruff",
+      --   "ruff_lsp",
+      --   "pyright",
+      --   "lua-language-server",
+      --   "rust-analyzer",
+      -- },
     },
   },
 
@@ -55,42 +56,7 @@ return {
     'nvimdev/dashboard-nvim',
     event = 'VimEnter',
     config = function()
-      require('dashboard').setup {
-        theme = 'hyper',  -- or doom
-        config = {
-          week_header = {
-           enable = true,
-          },
-          shortcut = {
-            {
-              desc = ' last_session',
-              group = 'Number',
-              action = 'SessionRestore',
-              key = 'r',
-            },
-            {
-              desc = ' tree',
-              -- group = 'DiagnosticHint',
-              action = 'NvimTreeFocus',
-              key = 'n',
-            },
-            {
-              icon = ' ',
-              icon_hl = '@variable',
-              desc = 'find_file',
-              group = 'Label',
-              action = 'Telescope find_files',
-              key = 'f',
-            },
-            { desc = '󰊳 update', group = '@property', action = 'Lazy update', key = 'u' },
-          },
-          footer = {
-            '',
-            '',
-            '🏀',
-          },
-        },
-      }
+      return require "configs.dashboard"
     end,
     dependencies = { {'nvim-tree/nvim-web-devicons'}}
   },
@@ -114,37 +80,13 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = {
-      lsp = {
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-        hover = {
-          enabled = false,
-        },
-        signature = {
-          enabled = false,
-        },
-      },
-      routes = {
-        {
-          filter = {
-            event = "msg_show",
-            any = {
-              { find = "%d+L, %d+B"},
-              { find = "; after #%d+"},
-              { find = "; before #%d+"},
-            },
-          },
-        },
-      },
-      view = "mini",
-    },
+    opts = function ()
+      return require('configs.noice')
+    end,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
+      "echasnovski/mini.nvim"
       }
   },
 
@@ -177,6 +119,45 @@ return {
     "tpope/vim-fugitive"
   },
 
+  {
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+        "LazyGit",
+        "LazyGitConfig",
+        "LazyGitCurrentFile",
+        "LazyGitFilter",
+        "LazyGitFilterCurrentFile",
+    },
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    -- keys = {
+    --     { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    -- }
+  },
+
+  {
+    "rust-lang/rust.vim",
+    ft = "rust",
+    init = function ()
+      vim.g.rustfmt_autosave = 1
+    end
+  },
+
+  {
+    "simrat39/rust-tools.nvim",
+    ft = 'rust',
+    dependencies = 'neovim/nvim-lspconfig',
+    opts = function ()
+      return require 'configs.rust-tools'
+    end,
+    config = function(_, opts)
+      require('rust-tools').setup(opts)
+    end
+  },
+
+
   -- {
   --   "jackMort/ChatGPT.nvim",
   --     event = "VeryLazy",
@@ -199,5 +180,4 @@ return {
   --      "html", "css"
   -- 		},
   -- 	},
-  -- },
 }

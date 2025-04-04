@@ -4,7 +4,7 @@ local lspconfig = require "lspconfig"
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- local servers = { "html", "pyright", "docker-compose-language-service", "dockerfile-language-server", "lua-language-server"}
-local servers = {"lua_ls", "dockerls"}
+local servers = {"lua_ls", "dockerls", "pyright" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
