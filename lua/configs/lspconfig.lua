@@ -40,3 +40,16 @@ lspconfig.ruff.setup({
     },
   },
 })
+
+-- vim.lsp.config('ruff', {
+--   on_attach = nvlsp.on_attach,
+--   capabilities = nvlsp.capabilities,
+--   on_init = nvlsp.on_init,
+--   init_options = {
+--     settings = {
+--       args = { "--line-length=88" }, -- Пример дополнительных аргументов
+--     }
+--   }
+-- })
+-- --
+-- vim.lsp.enable('ruff')
