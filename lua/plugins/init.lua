@@ -15,18 +15,6 @@ return {
       },
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
-    opts = {
-      -- ensure_installed = {
-      --   "black",
-      --   "debugpy",
-      --   "mypy",
-      --   "ruff",
-      --   "ruff_lsp",
-      --   "pyright",
-      --   "lua-language-server",
-      --   "rust-analyzer",
-      -- },
-    },
   },
 
   {
@@ -47,6 +35,10 @@ return {
     "nvimtools/none-ls.nvim",
     -- "jose-elias-alvarez/null-ls.nvim",
     ft = {"python"},
+    dependencies = {
+      'nvimtools/none-ls-extras.nvim',
+      'jayp0521/mason-null-ls.nvim',
+    },
     opts = function()
       return require "configs.null-ls"
     end,
