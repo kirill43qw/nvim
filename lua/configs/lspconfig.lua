@@ -23,8 +23,10 @@ lspconfig.pyright.setup({
     },
     python = {analysis = {
       autoSearchPaths=true,
-      diagnosticMode='openFilesOnly',
-      typeCheckingMode='basic'
+      diagnosticMode = "workspace", -- or 'openFilesOnly'
+      userLibraryCodeForTypes=true,
+      typeCheckingMode = 'strict', -- or 'basic'
+      -- ??? extraPaths = { "./src" }, -- если нужно
     }},
   },
 })
