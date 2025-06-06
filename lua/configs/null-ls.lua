@@ -22,15 +22,10 @@ local opts = {
     formatting.stylua,
     formatting.shfmt.with { args = { '-i', '4' } },
     formatting.terraform_fmt,
-    require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
-    require 'none-ls.formatting.ruff_format',
-    null_ls.builtins.formatting.black,
-    -- null_ls.builtins.diagnostics.mypy.with({
-    --   extra_args = function()
-    --   local virtual = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX") or "/usr"
-    --   return { "--python-executable", virtual .. "/bin/python3" }
-    --   end,
-    -- }),
+    require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I', "--ignore", "F401", } },
+    require("none-ls.formatting.ruff_format").with {
+      extra_args = { "--ignore", "F401" },
+    },
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
@@ -63,34 +58,3 @@ local opts = {
   end,
 }
 return opts
-
-
-
--- local opts = {
---   sources = {
---     null_ls.builtins.formatting.black,
---     -- null_ls.builtins.diagnostics.mypy.with({
---     --   extra_args = function()
---     --   local virtual = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX") or "/usr"
---     --   return { "--python-executable", virtual .. "/bin/python3" }
---     --   end,
---     -- }),
---     -- null_ls.builtins.diagnostics.ruff,
---   },
---   on_attach = function(client, bufnr)
---     if client.supports_method("textDocument/formatting") then
---       vim.api.nvim_clear_autocmds({
---         group = augroup,
---         buffer = bufnr,
---       })
---       vim.api.nvim_create_autocmd("BufWritePre", {
---         group = augroup,
---         buffer = bufnr,
---         callback = function()
---           vim.lsp.buf.format({ bufnr = bufnr })
---         end,
---       })
---     end
---   end,
--- }
--- return opts
