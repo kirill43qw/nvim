@@ -1,4 +1,10 @@
 return {
+  -- { import = "nvchad.blink.lazyspec" }, -- ???
+  -- {
+  --    "Saghen/blink.cmp",
+  --     opts = { HERE }
+  -- },
+
   {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save

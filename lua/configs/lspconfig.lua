@@ -1,8 +1,8 @@
 local lspconfig = require "lspconfig"
 local nvlsp = require "nvchad.configs.lspconfig"
 
--- local servers = { "html", "pyright", "docker-compose-language-service", "dockerfile-language-server", "lua-language-server"}
-local servers = {"lua_ls", "dockerls", "pyright",}
+-- local servers = {"pyright", "lua_ls"}
+local servers = {"dockerls", "pyright", }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -11,6 +11,14 @@ for _, lsp in ipairs(servers) do
     capabilities = nvlsp.capabilities,
   }
 end
+
+-- for _, lsp in ipairs(servers) do
+--     vim.lsp.config(lsp, { -- <--- ИСПРАВЛЕНО: lsp (строка) и затем таблица {}
+--         on_attach = nvlsp.on_attach,
+--         on_init = nvlsp.on_init,
+--         capabilities = nvlsp.capabilities,
+--     })
+-- end
 
 lspconfig.pyright.setup({
   on_attach = nvlsp.on_attach,
@@ -25,8 +33,9 @@ lspconfig.pyright.setup({
       autoSearchPaths=true,
       diagnosticMode = "workspace", -- or 'openFilesOnly'
       userLibraryCodeForTypes=true,
-      typeCheckingMode = 'strict', -- or 'basic'
+      typeCheckingMode = 'basic', -- 'off', 'strict' or 'basic'
       -- ??? extraPaths = { "./src" }, -- если нужно
     }},
   },
 })
+

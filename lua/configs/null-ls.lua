@@ -17,18 +17,19 @@ local opts = {
   },
 
   sources = {
+    formatting.black,
     diagnostics.checkmake,
     formatting.prettier.with { filetypes = { 'html', 'json', 'yaml', 'markdown' } },
     formatting.stylua,
     formatting.shfmt.with { args = { '-i', '4' } },
     formatting.terraform_fmt,
     -- require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I', "--ignore", "F401", } },
-    require("none-ls.formatting.ruff_format").with {
-      extra_args = { "--ignore", "F401" },
-    },
+    -- require("none-ls.formatting.ruff_format").with {
+    --   extra_args = { "--ignore", "F401" },
+    -- },
   },
   on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
+    if client:supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({
         group = augroup,
         buffer = bufnr,
