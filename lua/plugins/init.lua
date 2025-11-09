@@ -7,7 +7,7 @@ return {
 
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -19,7 +19,6 @@ return {
       opts = {
         auto_install = true,
       },
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
   },
 
@@ -39,11 +38,9 @@ return {
 
   {
     "nvimtools/none-ls.nvim",
-    -- "jose-elias-alvarez/null-ls.nvim",
-    ft = {"python"},
     dependencies = {
-      'nvimtools/none-ls-extras.nvim',
-      'jayp0521/mason-null-ls.nvim',
+      "nvimtools/none-ls-extras.nvim",
+      "jayp0521/mason-null-ls.nvim",
     },
     opts = function()
       return require "configs.null-ls"
@@ -51,41 +48,41 @@ return {
   },
 
   {
-    'nvimdev/dashboard-nvim',
-    event = 'VimEnter',
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
     config = function()
       return require "configs.dashboard"
     end,
-    dependencies = { {'nvim-tree/nvim-web-devicons'}}
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
   },
 
   {
-    'rmagatti/auto-session',
+    "rmagatti/auto-session",
     lazy = false,
     dependencies = {
-      'nvim-telescope/telescope.nvim',
+      "nvim-telescope/telescope.nvim",
     },
     config = function()
-      require('auto-session').setup({
-        auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      require("auto-session").setup {
+        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
         -- auto_sessions_enabled = true,
         auto_save_enabled = true,
         auto_restore_enabled = false,
-      })
+      }
     end,
   },
 
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = function ()
-      return require('configs.noice')
+    opts = function()
+      return require "configs.noice"
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
-      "echasnovski/mini.nvim"
-      }
+      "echasnovski/mini.nvim",
+    },
   },
 
   {
@@ -100,35 +97,35 @@ return {
     lazy = false,
     config = function()
       require("todo-comments").setup()
-    end
+    end,
   },
 
   {
     "ggandor/leap.nvim",
     lazy = false,
-    config = function ()
-      local leap = require('leap')
+    config = function()
+      local leap = require "leap"
       leap.add_default_mappings()
       leap.opts.case_sensitive = true
     end,
   },
 
-  {
-    "tpope/vim-fugitive"
-  },
+  -- {
+  --   "tpope/vim-fugitive"
+  -- },
 
   {
     "kdheepak/lazygit.nvim",
     lazy = true,
     cmd = {
-        "LazyGit",
-        "LazyGitConfig",
-        "LazyGitCurrentFile",
-        "LazyGitFilter",
-        "LazyGitFilterCurrentFile",
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
     },
     dependencies = {
-        "nvim-lua/plenary.nvim",
+      "nvim-lua/plenary.nvim",
     },
     -- keys = {
     --     { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
@@ -138,23 +135,32 @@ return {
   {
     "rust-lang/rust.vim",
     ft = "rust",
-    init = function ()
+    init = function()
       vim.g.rustfmt_autosave = 1
-    end
+    end,
   },
 
   {
     "simrat39/rust-tools.nvim",
-    ft = 'rust',
-    dependencies = 'neovim/nvim-lspconfig',
-    opts = function ()
-      return require 'configs.rust-tools'
+    ft = "rust",
+    dependencies = "neovim/nvim-lspconfig",
+    opts = function()
+      return require "configs.rust-tools"
     end,
     config = function(_, opts)
-      require('rust-tools').setup(opts)
-    end
+      require("rust-tools").setup(opts)
+    end,
   },
 
+  {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+    opts = {
+      window = {
+        width = 0.65,
+      },
+    },
+  },
 
   -- {
   --   "jackMort/ChatGPT.nvim",
@@ -169,13 +175,4 @@ return {
   --       "nvim-telescope/telescope.nvim"
   --     }
   -- },
-
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
 }

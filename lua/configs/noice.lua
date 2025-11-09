@@ -7,10 +7,12 @@ local opts = {
       ["cmp.entry.get_documentation"] = true,
     },
     hover = {
-      enabled = false,
+      -- enabled = false,
+      enabled = true,
     },
     signature = {
-      enabled = false,
+      -- enabled = false,
+      enabled = true,
     },
   },
   routes = {

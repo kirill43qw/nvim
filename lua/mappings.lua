@@ -11,6 +11,7 @@ map("i", "jk", "<ESC>")
 map("n", "\\", "<cmd>:vsplit <CR>")
 map("n", "<leader>\\", "<cmd>:split <CR>")
 map("n", "<leader>gp", "<cmd>:Gitsigns toggle_current_line_blame<CR>")
+map("n", "zz", "<cmd>:ZenMode<CR>", { desc = "Zen Mode" })
 
 map('n',"<leader>lg", "<cmd>LazyGit<CR>")
 -- map('n', "<leader>s", "<cmd>w<CR>")

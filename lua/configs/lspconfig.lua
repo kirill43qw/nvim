@@ -1,41 +1,33 @@
-local lspconfig = require "lspconfig"
+require("mason-lspconfig").setup()
 local nvlsp = require "nvchad.configs.lspconfig"
 
--- local servers = {"pyright", "lua_ls"}
-local servers = {"dockerls", "pyright", }
+local servers = { "dockerls", "yamlls", "jsonls", "html", "sqlls", "lua_ls", "ruff" }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     on_attach = nvlsp.on_attach,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
-  }
+  })
 end
 
--- for _, lsp in ipairs(servers) do
---     vim.lsp.config(lsp, { -- <--- ИСПРАВЛЕНО: lsp (строка) и затем таблица {}
---         on_attach = nvlsp.on_attach,
---         on_init = nvlsp.on_init,
---         capabilities = nvlsp.capabilities,
---     })
--- end
-
-lspconfig.pyright.setup({
+vim.lsp.config("pyright", {
   on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities,
   on_init = nvlsp.on_init,
-  filetypes = {"python"},
+  filetypes = { "python" },
   settings = {
     pyright = {
-      autoImportCompletion=true,
+      autoImportCompletion = true,
     },
-    python = {analysis = {
-      autoSearchPaths=true,
-      diagnosticMode = "workspace", -- or 'openFilesOnly'
-      userLibraryCodeForTypes=true,
-      typeCheckingMode = 'basic', -- 'off', 'strict' or 'basic'
-      -- ??? extraPaths = { "./src" }, -- если нужно
-    }},
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "workspace", -- or 'openFilesOnly'
+        userLibraryCodeForTypes = true,
+        typeCheckingMode = "basic", -- 'off', 'strict' or 'basic'
+        -- ??? extraPaths = { "./src" }, -- если нужно
+      },
+    },
   },
 })
-
