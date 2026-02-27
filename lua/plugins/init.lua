@@ -100,13 +100,27 @@ return {
     end,
   },
 
+  -- нужно заменить на flash.nvim?
   {
-    "ggandor/leap.nvim",
+    -- "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim",
     lazy = false,
+    dependencies = {
+      -- "ggandor/leap-ast.nvim", -- Поиск по AST дереву
+      -- "ggandor/flit.nvim", -- Улучшенные f/t движения
+    },
     config = function()
-      local leap = require "leap"
-      leap.add_default_mappings()
-      leap.opts.case_sensitive = true
+      require("leap").setup {
+        case_sensitive = true,
+      }
+      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+      vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+      --   -- Включить подсветку для flit
+      -- require("flit").setup {
+      --   keys = { f = "f", F = "F", t = "t", T = "T" },
+      --   labeled_modes = "nv",
+      --   multiline = true,
+      -- }
     end,
   },
 
