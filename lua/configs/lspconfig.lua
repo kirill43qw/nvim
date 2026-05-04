@@ -1,7 +1,8 @@
 require("mason-lspconfig").setup()
 local nvlsp = require "nvchad.configs.lspconfig"
 
-local servers = { "dockerls", "yamlls", "jsonls", "html", "sqlls", "lua_ls", "ruff" }
+-- local servers = { "dockerls", "yamlls", "jsonls", "html", "sqlls", "lua_ls", "ruff" }
+local servers = { "dockerls", "yamlls", "jsonls", "html", "sqlls", "lua_ls" }
 
 for _, lsp in ipairs(servers) do
   vim.lsp.config(lsp, {
@@ -35,3 +36,14 @@ vim.lsp.config("pyright", {
     },
   },
 })
+
+-- Настройка Ruff (замена костыля из null-ls)
+-- vim.lsp.config("ruff", {
+--   on_attach = function(client, bufnr)
+--     nvlsp.on_attach(client, bufnr)
+--     -- Отключаем hover у Ruff, оставляем его для Pyright
+--     client.server_capabilities.hoverProvider = false
+--   end,
+--   capabilities = nvlsp.capabilities,
+--   on_init = nvlsp.on_init,
+-- })

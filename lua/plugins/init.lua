@@ -37,17 +37,6 @@ return {
   },
 
   {
-    "nvimtools/none-ls.nvim",
-    dependencies = {
-      "nvimtools/none-ls-extras.nvim",
-      "jayp0521/mason-null-ls.nvim",
-    },
-    opts = function()
-      return require "configs.null-ls"
-    end,
-  },
-
-  {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
     config = function()
@@ -110,9 +99,7 @@ return {
       -- "ggandor/flit.nvim", -- Улучшенные f/t движения
     },
     config = function()
-      require("leap").setup {
-        case_sensitive = true,
-      }
+      require("leap").opts.vim_opts["go.ignorecase"] = false
       vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
       vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
       --   -- Включить подсветку для flit
@@ -147,26 +134,6 @@ return {
   },
 
   {
-    "rust-lang/rust.vim",
-    ft = "rust",
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end,
-  },
-
-  {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-    dependencies = "neovim/nvim-lspconfig",
-    opts = function()
-      return require "configs.rust-tools"
-    end,
-    config = function(_, opts)
-      require("rust-tools").setup(opts)
-    end,
-  },
-
-  {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
     opts = {
@@ -175,18 +142,9 @@ return {
       },
     },
   },
-
-  -- {
-  --   "jackMort/ChatGPT.nvim",
-  --     event = "VeryLazy",
-  --     config = function()
-  --       require("chatgpt").setup()
-  --     end,
-  --     dependencies = {
-  --       "MunifTanjim/nui.nvim",
-  --       "nvim-lua/plenary.nvim",
-  --       "folke/trouble.nvim",
-  --       "nvim-telescope/telescope.nvim"
-  --     }
-  -- },
 }
+
+-- Варианты улучшения
+-- 1. Дебаггер (mfussenegger/nvim-dap + nvim-dap-python):x
+-- 2. Интеграция с тестами (nvim-neotest/neotest)
+-- 3. Присмотрись к плагину tpope/vim-dadbod (и его UI-расширению vim-dadbod-ui + комплиту vim-dadbod-completion).
