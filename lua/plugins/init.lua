@@ -1,8 +1,19 @@
 return {
-  -- { import = "nvchad.blink.lazyspec" }, -- ???
+  -- { import = "nvchad.blink.lazyspec" },
+
   -- {
-  --    "Saghen/blink.cmp",
-  --     opts = { HERE }
+  --   "saghen/blink.cmp",
+  --   opts = {
+  --     keymap = {
+  --       preset = "default", -- или "super-tab", "enter"
+  --     },
+  --     completion = {
+  --       list = { selection = { preselect = true, auto_insert = true } },
+  --       documentation = {
+  --         treesitter_highlighting = false, -- отключение подвсетки (т.к. выбивало ошибку)
+  --       },
+  --     },
+  --   },
   -- },
 
   {
@@ -26,6 +37,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      -- "saghen/blink.cmp",
       "hrsh7th/cmp-nvim-lsp",
       { "antosha417/nvim-lsp-file-operations", config = true },
       { "folke/neodev.nvim", opts = {} },

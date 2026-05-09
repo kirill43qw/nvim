@@ -1,4 +1,3 @@
-
 local opts = {
   lsp = {
     override = {
@@ -11,8 +10,8 @@ local opts = {
       enabled = true,
     },
     signature = {
-      -- enabled = false,
-      enabled = true,
+      enabled = false,
+      -- enabled = true,
     },
   },
   routes = {
@@ -20,9 +19,9 @@ local opts = {
       filter = {
         event = "msg_show",
         any = {
-          { find = "%d+L, %d+B"},
-          { find = "; after #%d+"},
-          { find = "; before #%d+"},
+          { find = "%d+L, %d+B" },
+          { find = "; after #%d+" },
+          { find = "; before #%d+" },
         },
       },
     },

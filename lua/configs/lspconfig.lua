@@ -16,7 +16,7 @@ vim.lsp.config("pyright", {
   -- on_attach = nvlsp.on_attach,
   on_attach = function(client, bufnr) -- убрать всплывающие подсказки от lsp
     nvlsp.on_attach(client, bufnr)
-    client.server_capabilities.signatureHelpProvider = nil
+    client.server_capabilities.signatureHelpProvider = false
   end,
   capabilities = nvlsp.capabilities,
   on_init = nvlsp.on_init,
@@ -38,12 +38,12 @@ vim.lsp.config("pyright", {
 })
 
 -- Настройка Ruff (замена костыля из null-ls)
--- vim.lsp.config("ruff", {
---   on_attach = function(client, bufnr)
---     nvlsp.on_attach(client, bufnr)
---     -- Отключаем hover у Ruff, оставляем его для Pyright
---     client.server_capabilities.hoverProvider = false
---   end,
---   capabilities = nvlsp.capabilities,
---   on_init = nvlsp.on_init,
--- })
+vim.lsp.config("ruff", {
+  on_attach = function(client, bufnr)
+    nvlsp.on_attach(client, bufnr)
+    -- Отключаем hover у Ruff, оставляем его для Pyright
+    client.server_capabilities.hoverProvider = false
+  end,
+  capabilities = nvlsp.capabilities,
+  on_init = nvlsp.on_init,
+})
